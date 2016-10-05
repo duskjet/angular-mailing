@@ -14,9 +14,17 @@ angular.module('app', ['ui.router']);
         });
         $stateProvider
             .state('login', {
-                url: '/login',
+                url: '/login', templateUrl: 'views/login.html', controller: 'loginController', controllerAs: 'login'
+            })
+            .state('register', {
+                url: '/register', templateUrl: 'views/register.html', controller: 'registerController', controllerAs: 'register'
+            })
+            .state('email', {
+                url: '/email',
                 views: {
-                    '': { templateUrl: 'views/login.html', controller: 'loginController', controllerAs: 'login' }
+                    '': { templateUrl: 'views/email.html', controller: 'emailController', controllerAs: 'email' },
+                    'composer@email': { templateUrl: 'views/email-form.html', controller: 'emailComposerController', controllerAs: 'composer' },
+                    'results@email': { templateUrl: 'views/email-results.html', controller: 'emailResultsController', controllerAs: 'results' }
                 }
             });
             // .state('user.summary', {

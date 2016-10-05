@@ -5,15 +5,19 @@
         .module('app')
         .controller('loginController', loginController);
 
-    loginController.$inject = ['$scope'];
+    loginController.$inject = ['$scope', '$state', 'userService'];
 
-    function loginController($scope) {
+    function loginController($scope, $state, service) {
         var vm = this;
 
         vm.form = { username: '', password: '' }
 
-        vm.attemptLogin = function () {
-            console.log(vm.form);
+        vm.tryLogin = function (form) {
+            console.log(form);
+            service.login(form, function (response) {
+                console.log(response);
+                $state.go('email');
+            });
         }
     };
 })();

@@ -1,7 +1,11 @@
-<label>Username</label>
-<input type="text" ng-model="login.form.username" />
+<form name="loginForm">
+    <label>Username</label>
+    <input class="form-control" type="text" ng-model="login.form.username" />
 
-<label>Password</label>
-<input type="password" ng-model="login.form.password"/>
+    <label>Password</label>
+    <input class="form-control" type="password" ng-model="login.form.password" />
 
-<input type="button" ng-click="login.attemptLogin()" value="Login" />
+    <input class="btn btn-primary" type="button" ng-click="login.tryLogin(login.form)" value="Login" />
+</form>
+
+<a class="btn" ui-sref="register">Or create new account</a>

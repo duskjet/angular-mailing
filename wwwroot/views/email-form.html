@@ -1,12 +1,17 @@
-<label>From:</label>
-<input type="text" name="From" />
+<form name="emailForm">
 
-<label>To:</label>
-<input type="text" name="To" />
+    <label>From:</label>
+    <input class="form-control" type="text" name="From" disabled="disabled" value="{{email.username}}"/>
 
-<label>Subject:</label>
-<input type="text" name="Subject" />
+    <label>To:</label>
+    <input class="form-control" type="text" name="To" />
 
-<label>Message:</label>
-<textarea name="Message" rows="4" cols="50">
-</textarea>
+    <label>Subject:</label>
+    <input class="form-control" type="text" name="Subject" />
+
+    <label>Message:</label>
+    <textarea class="form-control" name="Message" rows="4" cols="50" ></textarea>
+
+    <a class="btn btn-primary" type="button">Send</a>
+
+</form>

@@ -1,8 +1,12 @@
-<label>Username</label>
-<input type="text" />
+<form name="registerForm">
+    <label>Username</label>
+    <input class="form-control" type="text" ng-model="register.form.username" />
 
-<label>Password</label>
-<input type="password" />
+    <label>Password</label>
+    <input class="form-control" type="password" ng-model="register.form.password" />
 
-<label>Repeat Password</label>
-<input type="password" />
+    <label>Repeat Password</label>
+    <input class="form-control" type="password" ng-model="register.form.repeatPassword" />
+
+    <input class="btn btn-primary" type="button" ng-click="register.tryRegister(register.form)" value="Register" />
+</form>

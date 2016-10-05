@@ -18,7 +18,7 @@
 
         $scope.$on('send-email', function(event, args){
             console.log('send-email received, ', args);
-            service.send(args.message, user.token, function(response) {
+            service.send(args, user.token, function(response) {
                 $scope.$broadcast('update-results', response.data)
             })
         });

@@ -1,17 +1,17 @@
 <form name="emailForm">
 
     <label>From:</label>
-    <input class="form-control" type="text" name="From" disabled="disabled" value="{{email.username}}"/>
+    <input class="form-control" type="text" name="From" disabled="disabled" ng-value="composer.form.from" />
 
     <label>To:</label>
-    <input class="form-control" type="text" name="To" />
+    <input class="form-control" type="text" name="To" ng-model="composer.form.to" />
 
     <label>Subject:</label>
-    <input class="form-control" type="text" name="Subject" />
+    <input class="form-control" type="text" name="Subject" ng-model="composer.form.subject" />
 
     <label>Message:</label>
-    <textarea class="form-control" name="Message" rows="4" cols="50" ></textarea>
+    <textarea class="form-control" name="Message" rows="4" cols="50" ng-model="composer.form.message"></textarea>
 
-    <a class="btn btn-primary" type="button">Send</a>
+    <a class="btn btn-primary" type="button" ng-click="composer.send(composer.form)">Send</a>
 
 </form>

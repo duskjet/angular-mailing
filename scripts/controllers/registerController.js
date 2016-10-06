@@ -12,6 +12,10 @@
 
         vm.form = { username: '', password: '', repeatPassword: '' }
 
+        vm.samePasswords = function (form) {
+            return vm.form.password != vm.form.repeatPassword;
+        }
+
         vm.tryRegister = function (form) {
             console.log(form);
         }

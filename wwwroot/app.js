@@ -1,4 +1,4 @@
-angular.module('app', ['ui.router', 'ui.grid', 'ui.grid.pagination']);
+angular.module('app', ['ui.router', 'angular-loading-bar', 'ui.bootstrap', 'ui.grid', 'ui.grid.pagination']);
 
 (function () {
     'use strict';
@@ -19,6 +19,12 @@ angular.module('app', ['ui.router', 'ui.grid', 'ui.grid.pagination']);
             .state('register', {
                 url: '/register', templateUrl: 'views/register.html', controller: 'registerController', controllerAs: 'register'
             })
+            .state('logout', {
+                controller: function ($injector) {
+                    var userService = $injector.get('userService');
+                    userService.logout();
+                }
+            })
             .state('email', {
                 url: '/email',
                 views: {
@@ -27,36 +33,6 @@ angular.module('app', ['ui.router', 'ui.grid', 'ui.grid.pagination']);
                     'results@email': { templateUrl: 'views/email-results.html', controller: 'emailResultsController', controllerAs: 'results' }
                 }
             });
-            // .state('user.summary', {
-            //     url: "/summary",
-            //     views: {
-            //         '': { templateUrl: '/apps/iacc/views/summary.html', controller: 'summaryCtrl' }
-            //     }
-            // })
-            // .state('user.addresses', {
-            //     url: "/addresses",
-            //     views: {
-            //         '': { templateUrl: '/apps/iacc/views/addresses.html', controller: 'addressesCtrl' }
-            //     }
-            // })
-            // .state('user.billing', {
-            //     url: "/billing",
-            //     views: {
-            //         '': { templateUrl: '/apps/iacc/views/billing.html', controller: 'billingCtrl' }
-            //     }
-            // })
-            // .state('user.others', {
-            //     url: "/others",
-            //     views: {
-            //         '': { templateUrl: '/apps/iacc/views/others.html', controller: 'othersCtrl' }
-            //     }
-            // })
-            // .state('user.notes', {
-            //     url: "/notes",
-            //     views: {
-            //         '': { templateUrl: '/apps/iacc/views/notes.html', controller: 'notesCtrl' }
-            //     }
-            // });
     };
 })();
 

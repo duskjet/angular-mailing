@@ -8,8 +8,12 @@
     emailService.$inject = ['$http'];
 
     function emailService($http) {
+        var emailRegex = /\S+@\S+\.\S+/;
+
         var service = {
-            send: send
+            send: send,
+            split: splitRecipients,
+            validate: validateEmail
         };
 
         return service;
@@ -50,6 +54,10 @@
                 splittedArray.push(match[1]);
             }
             return splittedArray;
+        }
+
+        function validateEmail(email) {
+            return emailRegex.test(email);
         }
     };
 })();

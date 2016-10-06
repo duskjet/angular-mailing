@@ -20,7 +20,7 @@
             console.log('send-email received, ', args);
             service.send(args, user.token, function(response) {
                 $scope.$broadcast('update-results', response.data)
-            })
+            });
         });
     };
 })();

@@ -37,6 +37,7 @@
         }
 
         function logout() {
+            console.log('logging out...');
             user = { token: null, name: null };
             $state.go('login');
         }

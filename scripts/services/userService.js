@@ -5,9 +5,9 @@
         .module('app')
         .factory('userService', userService);
 
-    userService.$inject = ['$http', '$state'];
+    userService.$inject = ['$http', 'API', '$state', 'Notification'];
 
-    function userService($http, $state) {
+    function userService($http, apiUrl, $state, notification) {
         var user = { token: null, name: null };
 
         var service = {
@@ -21,18 +21,17 @@
 
         function login(form, callback) {
             return $http({
-                url: "https://httpbin.org/post",
+                url: apiUrl.base + apiUrl.login,
                 dataType: 'json',
                 method: 'POST',
                 data: form
             }).success(function (response) {
-                console.log('OK GetContractByParams POST', response);
-
+                console.log(response);
                 user.token = 'token'; user.name = 'username@email.com'
-
+                notification.error({message: ""});
                 callback(response);
             }).error(function (error) {
-                console.log('GetContractByParams error POST', error);
+                console.error('http error: ', error);
             });
         }
 
@@ -43,16 +42,18 @@
         }
         function register(form, callback) {
             return $http({
-                url: "https://httpbin.org/post",
+                url: apiUrl.base + apiUrl.register, //"https://httpbin.org/post",
                 dataType: 'json',
                 method: 'POST',
                 data: form
             }).success(function (response) {
-                console.log('OK GetContractByParams POST', response);
-                response.authToken = "token";
+                console.log(response);
+
+                user.token = 'token'; user.name = 'username@email.com'
+
                 callback(response);
             }).error(function (error) {
-                console.log('GetContractByParams error POST', error);
+                console.error('http error: ', error);
             });
         }
     };

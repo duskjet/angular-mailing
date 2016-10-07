@@ -5,13 +5,14 @@
         .module('app')
         .factory('emailService', emailService);
 
-    emailService.$inject = ['$http'];
+    emailService.$inject = ['$http', 'API', 'Notification'];
 
-    function emailService($http) {
+    function emailService($http, api, notification) {
         var emailRegex = /\S+@\S+\.\S+/;
 
         var service = {
             send: send,
+            history: history,
             split: splitRecipients,
             validate: validateEmail
         };
@@ -20,7 +21,7 @@
 
         function send(form, token, callback) {
             // split "To" emails and write to array
-            var recipients = splitRecipients(form.to);//['zhopa@gmail.com', 'govno@gmail.com']; // splitRecipients(form.to);
+            var recipients = splitRecipients(form.to);
             // for each element in array, create new proper object and form an array to send
             var messages = [];
             for (var i = 0; i < recipients.length; i++) {
@@ -33,7 +34,7 @@
                 messages.push(mail);
             }
             return $http({
-                url: "https://httpbin.org/post",
+                url: api.base + api.email,
                 dataType: 'json',
                 method: 'POST',
                 headers: { 'Authorization': 'Bearer ' + token },
@@ -42,7 +43,20 @@
                 console.log('OK GetContractByParams POST', response);
                 callback(response);
             }).error(function (error) {
-                console.log('GetContractByParams error POST', error);
+                console.error('http error: ', error);
+            });
+        }
+
+        function history(token, callback){
+            return $http({
+                url: api.base + api.email,
+                dataType: 'json',
+                method: 'GET',
+                headers: { 'Authorization': 'Bearer ' + token }
+            }).success(function (response) {
+                callback(response);
+            }).error(function (error) {
+                console.error('http error: ', error);
             });
         }
 

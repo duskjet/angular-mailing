@@ -12,9 +12,9 @@
 
         vm.form = {
             from: $scope.$parent.email.username,
-            to: 'ruka, v govne',
-            subject: 'subject',
-            message: 'message message',
+            to: '',
+            subject: '',
+            message: '',
         };
 
         vm.validation = {regex: /\S+@\S+\.\S+/}

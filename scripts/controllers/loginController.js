@@ -16,8 +16,9 @@
             console.log(form);
             service.login(form, function (response) {
                 console.log(response);
-                $state.go('email');
+                $state.go('email.new');
             });
         }
+
     };
 })();

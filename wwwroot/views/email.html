@@ -16,11 +16,12 @@
                 <li>
                     <div class="navbar-text">{{email.username}}</div>
                 </li>
+                <li><a href="" ui-sref="email.history">Sent messages</a></li>
                 <li><a href="" ui-sref="logout">Log out</a></li>
             </ul>
         </div>
     </div>
 </nav>
 
-<div ui-view="composer@email" class="col-md-12 email-composer"></div>
-<div ui-view="results@email" class="col-md-12 email-results"></div>
+<div ui-view></div>
+

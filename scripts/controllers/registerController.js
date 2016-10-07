@@ -5,9 +5,9 @@
         .module('app')
         .controller('registerController', registerController);
 
-    registerController.$inject = ['$scope'];
+    registerController.$inject = ['$scope', 'userService', '$state'];
 
-    function registerController($scope) {
+    function registerController($scope, service, $state) {
         var vm = this;
 
         vm.form = { username: '', password: '', repeatPassword: '' }
@@ -17,7 +17,9 @@
         }
 
         vm.tryRegister = function (form) {
-            console.log(form);
+            service.register(form, function (response) {
+                $state.go('email.new');
+            });
         }
     };
 })();

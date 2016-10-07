@@ -24,7 +24,7 @@ form[name=loginForm], form[name=registerForm] {
 
 
 .email-composer, .email-results {
-    margin-bottom: 45px;
+    margin-bottom: 65px;
 }
 
 form[name=emailForm] .form-group textarea {

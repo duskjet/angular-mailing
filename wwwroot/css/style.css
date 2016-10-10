@@ -35,3 +35,8 @@ form[name=emailForm] .form-group textarea {
     height: 240px; 
     padding: 0;
 }
+
+.history-grid {
+    height: 480px; 
+    padding: 0;
+}

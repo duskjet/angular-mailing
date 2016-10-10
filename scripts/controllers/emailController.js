@@ -8,18 +8,20 @@
     emailController.$inject = ['$scope', 'emailService', 'userService'];
 
     function emailController($scope, service, user) {
-        console.log('base is firing, all good');
+        if (user.user().token == null){
+            user.logout();
+        }
+
         var vm = this;
-        vm.username = 'username@email.com';
+        vm.username = user.user().email;
 
         vm.logout = function () {
             user.logout();
         }
 
         $scope.$on('send-email', function (event, args) {
-            console.log('send-email received, ', args);
-            service.send(args, user.user.token, function (response) {
-                $scope.$broadcast('update-results', response.data)
+            service.send(args, function (response) {
+                $scope.$broadcast('update-results', response.emails)
             });
         });
     };
@@ -32,9 +34,9 @@
         .module('app')
         .controller('emailHistoryController', emailHistoryController);
 
-    emailHistoryController.$inject = ['$scope', 'emailService', 'userService'];
+    emailHistoryController.$inject = ['$scope', 'emailService', '$modal'];
 
-    function emailHistoryController($scope, service, user) {
+    function emailHistoryController($scope, service, $modal) {
 
         var vm = this;
         loadHistory();
@@ -42,8 +44,8 @@
         vm.historyGrid = {
             enableSorting: true,
             enableColumnMenus: false,
-            paginationPageSizes: [10, 25, 50],
-            paginationPageSize: 10,
+            paginationPageSizes: [50, 100],
+            paginationPageSize: 50,
             data: [],
             columnDefs: [
                 { displayName: 'Recepient', field: 'to', width: '20%' },
@@ -62,8 +64,23 @@
         };
 
         function loadHistory() {
-            service.history(user.user.token, function(response){
-                vm.historyGrid.data = response.data;
+            service.history(function(response){
+                vm.historyGrid.data = response.emails;
             })
+        }
+
+        function openMessagePopup(mail) {
+            var modal = $modal.open({
+                animation: true,
+                templateUrl: 'views/email-modal.html',
+                controller: 'emailModalController',
+                controllerAs: 'modal',
+                size: 'lg',
+                resolve: {
+                    mail: function () {
+                        return mail;
+                    }
+                }
+            });
         }
 }})();

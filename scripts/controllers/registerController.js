@@ -5,9 +5,9 @@
         .module('app')
         .controller('registerController', registerController);
 
-    registerController.$inject = ['$scope', 'userService', '$state'];
+    registerController.$inject = ['$scope', 'userService', '$state', 'Notification'];
 
-    function registerController($scope, service, $state) {
+    function registerController($scope, service, $state, notification) {
         var vm = this;
 
         vm.form = { username: '', password: '', repeatPassword: '' }
@@ -18,7 +18,8 @@
 
         vm.tryRegister = function (form) {
             service.register(form, function (response) {
-                $state.go('email.new');
+                $state.go('login');
+                notification.success('Account has been successfuly created. To log in please check your inbox for email confirmation.');
             });
         }
     };

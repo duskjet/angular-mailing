@@ -33,7 +33,7 @@
         };
 
         $scope.$on('update-results', function (event, array) {
-            var data = JSON.parse(array);
+            var data = array;
 
             updateGrid(data);
 

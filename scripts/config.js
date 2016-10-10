@@ -8,7 +8,8 @@
             login: '/post',
             logout: '/post',
             register: '/post',
-            email: '/post'
+            email: '/post',
+            history: '/get'
         });
 
 })();

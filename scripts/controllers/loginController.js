@@ -13,7 +13,6 @@
         vm.form = { username: '', password: '' }
 
         vm.tryLogin = function (form) {
-            console.log(form);
             service.login(form, function (response) {
                 console.log(response);
                 $state.go('email.new');

@@ -5,9 +5,9 @@
         .module('app')
         .factory('emailService', emailService);
 
-    emailService.$inject = ['$http', 'API', 'Notification'];
+    emailService.$inject = ['$http', 'API', 'userService', 'Notification'];
 
-    function emailService($http, api, notification) {
+    function emailService($http, api, userService, notification) {
         var emailRegex = /\S+@\S+\.\S+/;
 
         var service = {
@@ -19,7 +19,7 @@
 
         return service;
 
-        function send(form, token, callback) {
+        function send(form, callback) {
             // split "To" emails and write to array
             var recipients = splitRecipients(form.to);
             // for each element in array, create new proper object and form an array to send
@@ -33,28 +33,46 @@
                 }
                 messages.push(mail);
             }
+
             return $http({
                 url: api.base + api.email,
                 dataType: 'json',
                 method: 'POST',
-                headers: { 'Authorization': 'Bearer ' + token },
+                headers: { 'Authorization': 'Bearer ' + userService.user().token },
                 data: messages
             }).success(function (response) {
-                console.log('OK GetContractByParams POST', response);
-                callback(response);
+                if (response.code == 0) {
+                    callback(response);
+                }
+                else if (response.code == 2) {
+                    user.logout();
+                    notification.error(response.message);
+                }
+                else {
+                    notification.error(response.message);
+                }
             }).error(function (error) {
                 console.error('http error: ', error);
             });
         }
 
-        function history(token, callback){
+        function history(callback) {
             return $http({
-                url: api.base + api.email,
+                url: api.base + api.history,
                 dataType: 'json',
                 method: 'GET',
-                headers: { 'Authorization': 'Bearer ' + token }
+                headers: { 'Authorization': 'Bearer ' + userService.user().token }
             }).success(function (response) {
-                callback(response);
+                if (response.code == 0) {
+                    callback(response);
+                }
+                else if (response.code == 2) {
+                    user.logout();
+                    notification.error(response.message);
+                }
+                else {
+                    notification.error(response.message);
+                }
             }).error(function (error) {
                 console.error('http error: ', error);
             });
@@ -63,7 +81,7 @@
         function splitRecipients(text) {
             var splittedArray = [];
             var match, regex = /([^\s,].+?)(?:,|\s|$)/g;
-            
+
             while (match = regex.exec(text)) {
                 splittedArray.push(match[1]);
             }

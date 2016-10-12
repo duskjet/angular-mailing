@@ -38,7 +38,8 @@
                     callback(response);
                 }
                 else {
-                    notification.error(response.message);
+                    var msg = response.message || 'Error has occured';
+                    notification.error(msg);
                 }
             }).error(function (error) {
                 console.error('http error: ', error);
@@ -52,7 +53,7 @@
         }
         function register(form, callback) {
             return $http({
-                url: apiUrl.base + apiUrl.register, 
+                url: apiUrl.base + apiUrl.register,
                 dataType: 'json',
                 method: 'POST',
                 data: form
@@ -61,7 +62,8 @@
                     callback(response);
                 }
                 else {
-                    notification.error(response.message);
+                    var msg = response.message || 'Error has occured';
+                    notification.error(msg);
                 }
             }).error(function (error) {
                 console.error('http error: ', error);

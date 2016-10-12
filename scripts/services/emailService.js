@@ -46,10 +46,12 @@
                 }
                 else if (response.code == 2) {
                     user.logout();
-                    notification.error(response.message);
+                    var msg = response.message || 'Error has occured';
+                    notification.error(msg);
                 }
                 else {
-                    notification.error(response.message);
+                    var msg = response.message || 'Error has occured';
+                    notification.error(msg);
                 }
             }).error(function (error) {
                 console.error('http error: ', error);
@@ -68,10 +70,12 @@
                 }
                 else if (response.code == 2) {
                     user.logout();
-                    notification.error(response.message);
+                    var msg = response.message || 'Error has occured';
+                    notification.error(msg);
                 }
                 else {
-                    notification.error(response.message);
+                    var msg = response.message || 'Error has occured';
+                    notification.error(msg);
                 }
             }).error(function (error) {
                 console.error('http error: ', error);

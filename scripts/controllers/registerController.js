@@ -10,7 +10,7 @@
     function registerController($scope, service, $state, notification) {
         var vm = this;
 
-        vm.form = { username: '', password: '', repeatPassword: '' }
+        vm.form = { username: '', email: '', password: '', repeatPassword: '' }
 
         vm.samePasswords = function (form) {
             return vm.form.password != vm.form.repeatPassword;

@@ -22,5 +22,5 @@
         <label for="message" class="col-sm-2 control-label">Message:</label>
         <textarea name="message" class="form-control" name="Message" rows="4" cols="50" ng-model="composer.form.message" required></textarea>
     </div>
-    <a class="btn btn-lg btn-primary pull-right" type="button" ng-disabled="!composer.validateEmails() || emailForm.$invalid" ng-click="composer.send(composer.form)">Send</a>
+    <a class="btn btn-lg btn-primary pull-right" type="button" ng-click="composer.send(composer.form)">Send</a>
 </form>

@@ -32,6 +32,7 @@
                 <p ng-show="register.samePasswords()" class="help-block">Passwords do not match.</p>
             </div>
         </div>
+        <input type="hidden" name="antiforgerytoken" ng-model="register.form.token" ng-value="register.form.token"/>
         <input class="btn btn-primary btn-lg pull-right" type="button" ng-click="register.tryRegister(register.form)" value="Register" />
     </form>
 </div>

@@ -14,6 +14,7 @@
             login: login,
             logout: logout,
             register: register,
+            getAntiforgeryToken: antiforgery,
             user: getUserInfo
         };
 
@@ -51,6 +52,25 @@
             user = { token: null, name: null, email: null };
             $state.go('login');
         }
+
+        function antiforgery(callback) {
+            return $http({
+                url: apiUrl.base + apiUrl.token,
+                dataType: 'json',
+                method: 'GET'
+            }).success(function (response) {
+                if (response.code == 0) {
+                    callback(response);
+                }
+                else {
+                    var msg = response.message || 'Error has occured';
+                    notification.error(msg);
+                }
+            }).error(function (error) {
+                console.error('http error: ', error);
+            });
+        }
+
         function register(form, callback) {
             return $http({
                 url: apiUrl.base + apiUrl.register,

@@ -10,7 +10,11 @@
     function registerController($scope, service, $state, notification) {
         var vm = this;
 
-        vm.form = { username: '', email: '', password: '', repeatPassword: '' }
+        vm.form = { username: '', email: '', password: '', repeatPassword: '', token: '' }
+
+        service.getAntiforgeryToken(function (response){
+            vm.form.token = response.token;
+        })
 
         vm.samePasswords = function (form) {
             return vm.form.password != vm.form.repeatPassword;

@@ -8,6 +8,7 @@
             login: '/post',
             logout: '/post',
             register: '/post',
+            token: '/get',
             email: '/post',
             history: '/get'
         });
